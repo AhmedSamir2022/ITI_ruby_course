@@ -1,0 +1,12 @@
+<h1><%= @article.title %></h1>
+<p><%= @article.body %></p>
+
+<% if @article.image.attached? %>
+  <%= image_tag @article.image %>
+<% end %>
+
+<% if current_user && current_user == @article.user %>
+  <%= link_to "Edit", edit_article_path(@article) %> |
+  <%= link_to "Delete", article_path(@article), method: :delete %>
+<% elsif current_user %>
+  <%= button_to "
