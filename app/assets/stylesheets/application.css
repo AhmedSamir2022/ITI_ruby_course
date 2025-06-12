@@ -1,13 +1,4 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+
 .auth-nav {
   font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   padding: 1rem;
@@ -59,7 +50,72 @@
   text-decoration: underline;
 }
 
-.article-form {
+/* ========== Global Layout Helpers ========== */
+.page-section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #212529;
+}
+
+.page-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ========== Buttons ========== */
+.btn {
+  display: inline-block;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5c636a;
+}
+
+.btn-danger-outline {
+  background-color: transparent;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.btn-danger-outline:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* ========== Forms ========== */
+.form-container {
   max-width: 600px;
   margin: 2rem auto;
   padding: 1.5rem;
@@ -69,19 +125,18 @@
   font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-.article-form__field {
+.form-group {
   margin-bottom: 1.5rem;
 }
 
-.article-form__label {
+.form-label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
   color: #495057;
 }
 
-.article-form__input,
-.article-form__textarea {
+.form-control {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ced4da;
@@ -90,40 +145,22 @@
   transition: border-color 0.15s ease-in-out;
 }
 
-.article-form__input:focus,
-.article-form__textarea:focus {
+.form-control:focus {
   outline: none;
   border-color: #86b7fe;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
-.article-form__textarea {
+.form-control--textarea {
   min-height: 150px;
   resize: vertical;
 }
 
-.article-form__file {
-  width: 100%;
+.form-control--file {
   padding: 0.5rem 0;
 }
 
-.article-form__submit {
-  background-color: #0d6efd;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.15s ease-in-out;
-}
-
-.article-form__submit:hover {
-  background-color: #0b5ed7;
-}
-
-.article-form__errors {
+.form-errors {
   color: #dc3545;
   background-color: #f8d7da;
   border: 1px solid #f5c2c7;
@@ -132,45 +169,26 @@
   margin-bottom: 1.5rem;
 }
 
-.article-form__errors-heading {
+.form-errors__title {
   font-size: 1.1rem;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem;
 }
 
-.article-form__errors-list {
-  margin-bottom: 0;
+.form-errors__list {
   padding-left: 1.5rem;
+  margin: 0;
 }
 
+.form-errors__item {
+  list-style: disc;
+}
+
+/* ========== Articles Index ========== */
 .articles-container {
   max-width: 800px;
   margin: 2rem auto;
   padding: 0 1rem;
   font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-}
-
-.articles-header {
-  color: #212529;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-}
-
-.articles-new-link {
-  display: inline-block;
-  background-color: #0d6efd;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 500;
-  margin-bottom: 2rem;
-  transition: background-color 0.15s ease-in-out;
-}
-
-.articles-new-link:hover {
-  background-color: #0b5ed7;
-  text-decoration: none;
 }
 
 .articles-list {
@@ -235,137 +253,42 @@
   color: #6c757d;
 }
 
-.article-report-button {
-  background-color: transparent;
-  color: #dc3545;
-  border: 1px solid #dc3545;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
-}
-
-.article-report-button:hover {
-  background-color: #dc3545;
-  color: white;
-}
-
-.back-btn {
-  background-color: #cf3737;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.15s ease-in-out;
-}
-.back-btn:hover {
-  background-color: #a81919;
-}
-
-.article-show {
+/* ========== Article Show Page ========== */
+.article-details {
   max-width: 800px;
   margin: 2rem auto;
   padding: 0 1rem;
   font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-.article-show__title {
-  color: #212529;
-  margin-bottom: 1.5rem;
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.article-show__content {
+.article-body {
   color: #495057;
   line-height: 1.6;
   margin-bottom: 2rem;
   font-size: 1.1rem;
 }
 
-.article-show__content p {
+.article-body p {
   margin-bottom: 1.5rem;
 }
 
-.article-show__image {
+.article-image-large {
   margin: 2rem 0;
   text-align: center;
 }
 
-.article-show__image-img {
+.article-image-large__img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.article-show__meta {
+.article-meta-box {
   margin: 2rem 0;
   padding: 1rem;
   background-color: #f8f9fa;
   border-radius: 8px;
   font-size: 0.9rem;
   color: #6c757d;
-}
-
-.article-show__actions {
-  margin: 2rem 0;
-  display: flex;
-  gap: 1rem;
-}
-
-.article-show__edit-link,
-.article-show__delete-link {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.15s ease-in-out;
-}
-
-.article-show__edit-link {
-  background-color: #0d6efd;
-  color: white;
-  border: 1px solid #0d6efd;
-}
-
-.article-show__edit-link:hover {
-  background-color: #0b5ed7;
-  text-decoration: none;
-}
-
-.article-show__delete-link {
-  background-color: transparent;
-  color: #dc3545;
-  border: 1px solid #dc3545;
-}
-
-.article-show__delete-link:hover {
-  background-color: #dc3545;
-  color: white;
-  text-decoration: none;
-}
-
-.article-show__back {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e9ecef;
-}
-
-.article-show__back-link {
-  color: #0d6efd;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.15s ease;
-}
-
-.article-show__back-link:hover {
-  color: #0a58ca;
-  text-decoration: underline;
 }

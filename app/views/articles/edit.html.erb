@@ -1,3 +1,9 @@
-<h1><%= action_name.capitalize %> Article</h1>
-<%= render 'form', article: @article %>
-<%= link_to "Back", articles_path , class: "back-btn" %>
+<section class="page-section">
+  <h1 class="page-title"><%= action_name.capitalize %> Article</h1>
+
+  <%= render 'form', article: @article %>
+
+  <div class="page-actions">
+    <%= link_to "← Back to Articles", articles_path, class: "btn btn-secondary" %>
+  </div>
+</section>
