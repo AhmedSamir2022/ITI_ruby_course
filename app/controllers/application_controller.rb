@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user
-
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
+  allow_browser versions: :modern
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_path, alert: "Access denied!"
   end
 end

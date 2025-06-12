@@ -1,16 +1,31 @@
+# == Schema Information
+#
+# Table name: articles
+#
+#  id            :integer          not null, primary key
+#  title         :string
+#  content       :text
+#  user_id       :integer          not null
+#  reports_count :integer
+#  archived      :boolean
+#  image         :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+# Indexes
+#
+#  index_articles_on_user_id  (user_id)
+#
+
 class Article < ApplicationRecord
   belongs_to :user
-  has_one_attached :image
+  mount_uploader :image, ImageUploader
 
-  validates :title, :body, presence: true
-
-  before_save :check_reports_count
+  before_save :check_reports
 
   private
 
-  def check_reports_count
-    if reports_count.present? && reports_count >= 3
-      self.archived = true
-    end
+  def check_reports
+    self.archived = true if reports_count.to_i >= 3
   end
 end

@@ -1,22 +1,22 @@
 class ArticlesController < ApplicationController
-  before_action :require_login, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_article, only: [:show, :edit, :update, :destroy, :report]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
-    @articles = Article.where(archived: false)
+    @articles = Article.where(archived: [false, nil])
   end
 
   def show; end
 
   def new
-    @article = current_user.articles.build
+    @article = current_user.articles.new
   end
 
   def create
-    @article = current_user.articles.build(article_params)
+    @article = current_user.articles.new(article_params)
     if @article.save
-      redirect_to @article, notice: "Article created!"
+      redirect_to @article, notice: "Article created."
     else
       render :new
     end
@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to @article, notice: "Article updated!"
+      redirect_to @article, notice: "Updated!"
     else
       render :edit
     end
@@ -34,12 +34,15 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    redirect_to articles_path, notice: "Article deleted!"
+    redirect_to articles_path, notice: "Deleted!"
   end
 
   def report
+    @article = Article.find(params[:id])
     @article.increment!(:reports_count)
-    redirect_to articles_path, notice: "Reported!"
+    @article.save  # <- triggers before_save callback
+  
+    redirect_to articles_path, notice: "Article reported successfully."
   end
 
   private
@@ -48,15 +51,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def authorize_user!
-    redirect_to articles_path, alert: "Not authorized!" unless @article.user == current_user
-  end
-
-  def require_login
-    redirect_to login_path unless current_user
-  end
-
   def article_params
-    params.require(:article).permit(:title, :body, :image)
+    params.require(:article).permit(:title, :content, :image)
   end
 end
